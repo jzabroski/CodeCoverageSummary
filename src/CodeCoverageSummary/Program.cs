@@ -28,6 +28,12 @@ namespace CodeCoverageSummary
 
                                          if (matchingFiles?.Any() == false)
                                          {
+                                             if (string.Equals(o.Verbosity, "diagnostic", StringComparison.OrdinalIgnoreCase))
+                                             {
+                                                Matcher matcher = new();
+                                                IEnumerable<string> matchingFiles = matcher.GetResultsInFullPath(".");
+                                                Console.WriteLine($"Files available in search path: {string.Join(Environment.NewLine, matchingFiles)}");
+                                             }
                                              Console.WriteLine("Error: No files found matching glob pattern.");
                                              return -2; // error
                                          }
